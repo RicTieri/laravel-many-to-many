@@ -26,18 +26,6 @@
                             value="{{ old('author', $project->author) }}">
                     </div>
 
-                    {{-- <div class="mb-3 input-group">
-                        <label for="technology_id" class="input-group-text">Technologies:</label>
-                        <select class="form-select" type="text" name="technology_id" id="technology_id">
-                            @foreach ($technologies as $technology)
-                                <option value="{{ $technology->id }}" style="color: {{ $technology->color }}"
-                                    {{ $technology->id == old('technology_id', $project->technology_id) ? 'selected' : '' }}>
-                                    {{ $technology->technology }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div> --}}
-
                     <div class="mb-3 input-group">
                         <div>
                             @foreach ($technologies as $technology)

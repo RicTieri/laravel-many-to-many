@@ -47,8 +47,9 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate($this->rules);
+        // dd($data);
         $project = Project::create($data);
-        $project->technologies()->sync($data['technologies']);
+        if (isset($data['technologies'])) $project->technologies()->sync($data['technologies']);
 
         return redirect()->route('admin.projects.show', $project);
     }
@@ -80,7 +81,7 @@ class ProjectController extends Controller
     {
         $data = $request->validate($this->rules);
         $project->update($data);
-        $project->technologies()->sync($data['technologies']);
+        $project->technologies()->sync(isset($data['technologies']) ? $data['technologies'] : []);
 
         return redirect()->route('admin.projects.show', $project);
     }
