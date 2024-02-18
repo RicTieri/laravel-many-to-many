@@ -27,6 +27,30 @@
                     </div>
 
                     <div class="mb-3 input-group">
+                        <label for="technology_id" class="input-group-text">Technologies:</label>
+                        <select class="form-select" type="text" name="technology_id" id="technology_id">
+                            @foreach ($technologies as $technology)
+                                <option value="{{ $technology->id }}" style="color: {{ $technology->color }}"
+                                    {{ $technology->id == old('technology_id', $project->technology_id) ? 'selected' : '' }}>
+                                    {{ $technology->technology }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3 input-group">
+                        <label for="type_id" class="input-group-text">Type:</label>
+                        <select class="form-select" type="text" name="type_id" id="type_id">
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}" style="color: {{ $type->name }}"
+                                    {{ $type->id == old('type_id', $project->type_id) ? 'selected' : '' }}>
+                                    {{ $type->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3 input-group">
                         <label for="date" class="input-group-text">Date:</label>
                         <input class="form-control" type="date" name="date" id="date"
                             value="{{ old('date', $project->date) }}">

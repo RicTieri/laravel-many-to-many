@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
     private $rules = [
+        'type_id' => ['required'],
         'title' => ['required', 'min:3', 'string', 'max:40'],
         'author' => ['required', 'min:3', 'string', 'max:40'],
         'project_image' => ['url:https', 'required'],
@@ -32,7 +35,9 @@ class ProjectController extends Controller
     {
         $pageTitle = 'Create new Project';
         $project = new Project();
-        return view('admin.projects.create', compact('project', 'pageTitle'));
+        $technologies = Technology::all();
+        $types = Type::all();
+        return view('admin.projects.create', compact('project', 'pageTitle', 'technologies', 'types'));
     }
 
     /**
@@ -41,7 +46,9 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate($this->rules);
+        // dd($data);
         $project = Project::create($data);
+
 
         return redirect()->route('admin.projects.show', $project);
     }
@@ -59,7 +66,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $technologies = Technology::all();
+        $types = Type::all();
+
+
+        return view('admin.projects.edit', compact('project', 'technologies', 'types'));
     }
 
     /**
