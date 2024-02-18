@@ -20,6 +20,13 @@
                 <p class="pt-5">
                     {{ $project->author }}
                 </p>
+                @foreach ($project->technologies as $techonology)
+                    <button class="btn mb-3 border bg-primary text-light">
+
+                        {{ $techonology->technology }}
+
+                    </button>
+                @endforeach
                 <p>
                     {{ $project->date }}
                 </p>
