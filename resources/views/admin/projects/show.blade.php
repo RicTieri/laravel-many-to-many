@@ -21,7 +21,7 @@
                     {{ $project->author }}
                 </p>
                 @foreach ($project->technologies as $techonology)
-                    <button class="btn mb-3 border bg-primary text-light">
+                    <button class="btn mb-3 text-light" style="background: {{ $techonology->color }}">
 
                         {{ $techonology->technology }}
 
