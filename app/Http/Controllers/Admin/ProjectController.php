@@ -17,6 +17,7 @@ class ProjectController extends Controller
         'project_image' => ['url:https', 'required'],
         'content' => ['min:20', 'required'],
         'date' => ['date', 'required'],
+        'technologies' => ['exists:technologies,id'],
     ];
 
     /**
@@ -46,9 +47,8 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate($this->rules);
-        // dd($data);
         $project = Project::create($data);
-
+        $project->technologies()->sync($data['technologies']);
 
         return redirect()->route('admin.projects.show', $project);
     }
@@ -80,6 +80,7 @@ class ProjectController extends Controller
     {
         $data = $request->validate($this->rules);
         $project->update($data);
+        $project->technologies()->sync($data['technologies']);
 
         return redirect()->route('admin.projects.show', $project);
     }

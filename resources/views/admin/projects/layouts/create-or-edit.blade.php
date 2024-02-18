@@ -26,7 +26,7 @@
                             value="{{ old('author', $project->author) }}">
                     </div>
 
-                    <div class="mb-3 input-group">
+                    {{-- <div class="mb-3 input-group">
                         <label for="technology_id" class="input-group-text">Technologies:</label>
                         <select class="form-select" type="text" name="technology_id" id="technology_id">
                             @foreach ($technologies as $technology)
@@ -36,6 +36,18 @@
                                 </option>
                             @endforeach
                         </select>
+                    </div> --}}
+
+                    <div class="mb-3 input-group">
+                        <div>
+                            @foreach ($technologies as $technology)
+                                <input class="form-check-input" type="checkbox" name="technologies[]"
+                                    id="technology-{{ $technology->id }}" value="{{ $technology->id }}"
+                                    {{ in_array($technology->id, old('technology', $project->technologies->pluck('id')->toArray())) ? 'checked' : '' }}>
+
+                                <label for="tags-{{ $technology->id }}"> {{ $technology->technology }}</label>
+                            @endforeach
+                        </div>
                     </div>
 
                     <div class="mb-3 input-group">
